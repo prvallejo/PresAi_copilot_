@@ -204,7 +204,7 @@ body{font-family:var(--ff);color:var(--txt);font-size:13px;background:var(--bg3)
 .ls-foot .lv{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--amber)}
 
 /* ── TOF (Cubicaciones) ── */
-.tof-hdr{display:grid;grid-template-columns:1fr 60px 60px 60px 80px 30px;background:var(--bg2);border-bottom:1px solid var(--border2);padding:0 8px}
+.tof-hdr{display:grid;grid-template-columns:1fr 50px 50px 50px 50px 80px 30px;background:var(--bg2);border-bottom:1px solid ... 
 .tof-hdr span{padding:8px 4px;font-size:9px;font-weight:600;color:var(--txt2);text-transform:uppercase}
 .tof-row{display:grid;grid-template-columns:1fr 60px 60px 60px 80px 30px;border-bottom:1px solid var(--border);padding:0 8px;align-items:center}
 .tof-row input{font-size:12px;padding:6px 4px;border:none;background:transparent;outline:none;width:100%}
@@ -855,7 +855,7 @@ function openTof(id){
 }
 function renderTof(id){
   let rows=tofData[id],it=items.find(x=>x.id===id);
-  let html=`<div class="tof-hdr"><span>Descripción / Eje</span><span>Cant.</span><span>Ancho</span><span>Largo</span><span>Total</span><span></span></div>`;
+  let html=`<div class="tof-hdr"><span>Descripción / Eje</span><span>Cant.</span><span>Ancho</span><span>Largo</<span><span>Alto</<span><span>Total</span><span></span></div>`;
   rows.forEach((r,ri)=>html+=`<div class="tof-row">
     <input value="${esc(r.desc)}" oninput="utof('${id}',${ri},'desc',this.value)"/>
     <input class="r" type="text" value="${fmtQ(N(r.n))}" oninput="utof('${id}',${ri},'n',this.value)" onfocus="this.select()"/>
