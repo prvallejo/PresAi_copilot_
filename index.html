@@ -469,7 +469,7 @@ const GG_SUBGROUP_OPTIONS = [
 
 const CFG_DEF = {
   currency:'CLP', parity:1, decimalsQty:2, decimalsPrice:0, decimalsBudget:0,
-  companyName:'Empresa Constructora.', companyTagline:'Construcción Civil · Chile',
+  companyName:'EMPRESA CONSTRUCTORA.', companyTagline:'Construcción Civil · Chile',
   companyRut:'', companyAddress:'', companyPhone:'', companyEmail:'', companyWeb:'',
   repLegal:'', repLegalRut:'', profName:'', profRut:'',
   colorHeader:'#1e3a5f', logoDataUrl:'', coverImgUrl:'',
@@ -481,7 +481,7 @@ const CFG_DEF = {
 let CFG = Object.assign({}, CFG_DEF);
 
 const UNITS_BUDGET = ['m3','m2','m','kg','un','día','mes','global'];
-const UNITS_APU = ['hd','hr','plg','plancha','lts','saco','cu','global','m3','m2','m','kg','un','día','mes'];
+const UNITS_APU = ['hd','hr','plg','plancha','lts','saco','global','m3','m2','m','kg','un','día','mes'];
 
 /* ── UTILS ── */
 function gid(){return 'id_'+Math.random().toString(36).substr(2,9);}
@@ -501,7 +501,22 @@ function updLogoHdr(){
   if(CFG.logoDataUrl) document.getElementById('logoWrap').innerHTML=`<img src="${CFG.logoDataUrl}"/>`;
 }
 
-function N(v){return parseFloat(v)||0;}
+function N(v) {
+  if (typeof v === 'string') {
+    // 1. Limpiamos el texto dejando solo números y puntos
+    let n = parseFloat(v.replace(/[^0-9.-]/g, '')) || 0;
+    
+    // 2. Detectamos si el usuario escribió UF o USD
+    if (v.toUpperCase().includes('UF') || v.toUpperCase().includes('USD')) {
+      // 3. Multiplicamos por el valor que tú pusiste en la celda de Paridad
+      let paridad = parseFloat(document.getElementById('pParidad').value) || 1;
+      return n * paridad;
+    }
+    return n;
+  }
+  return parseFloat(v) || 0;
+}
+
 function sym(){return CFG.currency==='USD'?'US$':CFG.currency==='UF'?'UF':'$';}
 function fmtN(n,d){
   if(CFG.currency==='UF') return n.toLocaleString('es-CL',{minimumFractionDigits:d||2,maximumFractionDigits:d||2});
