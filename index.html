@@ -632,6 +632,8 @@ function rc(){
   var pGG=N(document.getElementById('pGG').value),pU=N(document.getElementById('pUtil').value),pImp=N(document.getElementById('pImp').value),pIVA=N(document.getElementById('pIVA').value);
   var ggV=ggF?dc*(pGG/100):ggSubgroups.reduce((a,sg)=>a+sg.items.reduce((b,it)=>b+N(it.qty)*N(it.tiempoUso)*N(it.price),0),0);
   var util=dc*(pU/100),imp=dc*(pImp/100),net=dc+ggV+util+imp,iva=net*(pIVA/100),grand=net+iva;
+  // Enviamos el monto de Gastos Generales al visor superior
+document.getElementById('display-total-gg').innerText = fmtB(ggV);
   
   var html=`<div class="tr2"><span class="tl">Costo Directo</span><span class="tv">${sym()} ${fmtB(dc)}</span></div>`;
   
