@@ -873,12 +873,12 @@ function renderTof(id){
 }
 function atof(id){tofData[id].push({desc:'',n:1,a:1,l:1});renderTof(id);markUnsaved();}
 function utof(id,ri,f,v){
-  if(f==='n'||f==='a'||f==='l') v=N(v.replace(/\./g,'').replace(',','.'));
+  if(f==='n'||f==='a'||f==='l'||f==='h') v=N(v.replace(/\./g,'').replace(',','.'));
   tofData[id][ri][f]=v;
   let r=tofData[id][ri];
   let subEl = document.getElementById(`tof-sub-${id}-${ri}`);
   if(subEl) subEl.textContent = fmtQ(N(r.n)*Math.max(1,N(r.a))*Math.max(1,N(r.l)));
-  let total = tofData[id].reduce((x,r)=>x+(N(r.n)*Math.max(1,N(r.a))*Math.max(1,N(r.l))),0);
+  let total = tofData[id].reduce((x,r)=>x+(N(r.n)*Math.max(1,N(r.a))*Math.max(1,N(r.l))*Math.max(1,N(r.h))),0);
   let totEl = document.getElementById(`tof-total-${id}`);
   if(totEl) totEl.textContent = 'Total Cubicidad: '+fmtQ(total)+' '+esc(items.find(x=>x.id===id).unit);
   items.find(x=>x.id===id).qty = total;
